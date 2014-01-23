@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class LocalStorageManager {
     private static final String subcriptionFile = "subscriptions";
 
-    public static void saveSubscriptions(Context context, ArrayList<String> subscriptions) {
+    public static void saveDrinks(Context context, ArrayList<String> subscriptions) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(context.openFileOutput(subcriptionFile, Context.MODE_PRIVATE));
             objectOutputStream.writeObject(subscriptions);
@@ -25,7 +25,7 @@ public class LocalStorageManager {
         }
     }
 
-    public static ArrayList<String> loadSubscriptions(Context context) {
+    public static ArrayList<String> loadDrinks(Context context) {
         ArrayList<String> subscriptions = null;
 
 
@@ -35,7 +35,7 @@ public class LocalStorageManager {
             objectInputStream.close();
         }
         catch (FileNotFoundException e) {
-            saveSubscriptions(context, new ArrayList<String>());
+            saveDrinks(context, new ArrayList<String>());
         }
         catch (Exception e) {
             Toast.makeText(context, "An error occurred", 5).show();

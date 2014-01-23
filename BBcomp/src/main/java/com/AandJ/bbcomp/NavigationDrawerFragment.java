@@ -2,12 +2,12 @@ package com.AandJ.bbcomp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -42,8 +42,8 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
-    public static final String PREDEFINED_SECTION_NEARBY = "Nearby";
-    public static final String PREDEFINED_SECTION_POPULAR = "Popular";
+    public static final String PREDEFINED_SECTION_CURRENT_DRINKS = "Available drinks";
+    public static final String PREDEFINED_SECTION_ALL_DRINKS = "All drinks";
     public static final String PREDEFINED_SECTION_NEW = "New";
 
     /**
@@ -83,14 +83,14 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         adapter = new SectionedListAdapter();
-        adapter.addSeparatorItem("Featured");
-        adapter.addItem(PREDEFINED_SECTION_NEARBY);
-        //adapter.addItem(PREDEFINED_SECTION_POPULAR);
-        adapter.addItem(PREDEFINED_SECTION_NEW);
+        adapter.addSeparatorItem("Drink Menus");
+        adapter.addItem(PREDEFINED_SECTION_CURRENT_DRINKS);
+        adapter.addItem(PREDEFINED_SECTION_ALL_DRINKS);
+        //adapter.addItem(PREDEFINED_SECTION_NEW);
         adapter.addSectionSpace();
-        adapter.addSeparatorItem("Subscribed Tags");
-        ArrayList<String> localSubcriptions = LocalStorageManager.loadSubscriptions(getActivity());
-        for( String subscription : localSubcriptions) {
+        adapter.addSeparatorItem("Favorites");
+        ArrayList<String> favoriteDrinks = LocalStorageManager.loadDrinks(getActivity());
+        for( String subscription : favoriteDrinks) {
             adapter.addItem(subscription);
         }
         // Select either the default item (0) or the last selected item.
@@ -161,7 +161,7 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
 
             @Override
@@ -180,7 +180,7 @@ public class NavigationDrawerFragment extends Fragment {
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
 

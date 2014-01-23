@@ -8,9 +8,12 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.AandJ.bbcomp.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="32dp" />
 
 </RelativeLayout>
